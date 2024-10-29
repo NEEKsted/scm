@@ -1,0 +1,181 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='/static/images/download__1_-removebg-preview.png' rel='icon' type='image/x-icon'>
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='fontawesome/css/all.css')}}" rel='stylesheet'>
+    <title>SongCoMark</title>
+    <style>
+      body{
+        background-color:  rgba(77, 180, 180, 0.322);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+    
+  
+  </head>
+    <link href="/static/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/pkg/static/bootstrap/css/bootstrap.css">
+  </head>
+  <body>
+    
+     <!-- signature -->
+      <div class="row ms-0 justify-content-center">
+        <div class="col">
+          <h3 class="scm " style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: rgba(214, 79, 16, 0.527);"><a class="navbar-brand" href="/">SONGCOMARK</a></h3>
+        </div>
+
+        <div class="col-4 shadow mt-3" style="margin-inline-end: 5%;">
+            <ul class="nav justify-content-center">
+              <!-- home -->
+              <li class="nav-item">
+                <a class="nav-link active fw-bold" aria-current="page" href="/" title="SPACE" alt="SPACE"><i class="fa-solid fa-house-user"></i></a>
+              </li>
+
+              <!-- about us -->
+              <li class="nav-item">
+                <a class="nav-link text-dark fw-bold" href="/scm/update/" title="About Us" alt="About Us">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <i class="fa-regular fa-address-card"></i>
+                  </div>
+                </a>
+              </li>
+
+              <!-- contact us -->
+              <li class="nav-item">
+                <a class="nav-link text-dark fw-bold " href="#" title="Contact Us" alt="Contact Us"><i class="fa-solid fa-phone-volume"></i></a>
+              </li>
+
+              <!-- Adverts -->
+              <li class="nav-item">
+                <a class="nav-link " href="#" title="Adverts" alt="ADs"><i class="fa-solid fa-rectangle-ad"></i></a>
+              </li>
+            </ul>
+
+          </div>
+        
+      </div>
+     
+  
+      <div class="container mb-5 pb-5">
+        <main class="form-signin d-flex w-100 m-auto">
+          <div class="col-5">
+            <!-- text content -->
+          </div>
+      
+          <div class="col-7" >
+            <div class="row justify-content-center">
+              <span class="text-center scm" style="font-size:3rem; font-weight:900; color: #d64f1086;">SCM SIGN-UP</span>
+            </div>
+      
+          <!-- Flash messages -->
+          {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                      <div class="alert-container text-center">
+                          {% for message in messages %}
+                              <div class="alert alert-{{ 'success' if 'success' in message else 'info' }}" role="alert">
+                                  {{ message }}
+                              </div>
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+              {% endwith %}
+      
+              <!-- Registration Form -->
+<form method="POST" action="/scm/register/">
+  <div class="form-group">
+      <input type="text" class="form-control bg-transparent border-top border-bottom border-light" id="fname" name="fname" placeholder="First Name" style="background-color:rgba(214, 79, 16, 0.527)">
+      <label for="fname" class="form-label fw-bold fst-italic" style="color:rgba(214, 79, 16, 0.527)">First Name</label>
+  </div>
+
+  <div class="form-group">
+      <input type="text" class="form-control bg-transparent border-top border-bottom border-light" id="lname" name="lname" placeholder="Last Name" style="background-color:rgba(214, 79, 16, 0.527)">
+      <label for="lname" class="form-label fw-bold fst-italic" style="color:rgba(214, 79, 16, 0.527)">Last Name</label>
+  </div>
+
+  <div class="form-group">
+      <input type="email" class="form-control bg-transparent border-top border-bottom border-light" id="email" name="email" placeholder="Email" style="background-color:rgba(214, 79, 16, 0.527)">
+      <label for="email" class="form-label fw-bold fst-italic" style="color:rgba(214, 79, 16, 0.527)">Email</label>
+  </div>
+
+  <div class="form-group">
+    <!-- Country Dropdown (select) -->
+    <select class="form-control bg-transparent border-top border-bottom fs-6 border-light" id="country" name="country" style="background-color:rgba(214, 79, 16, 0.527)">
+        <option value="" selected>Select Country</option>
+        {% for country in country %}
+            <option value="{{ country.id }}">
+                {{ country.country_name }}
+            </option>
+        {% endfor %}
+    </select>
+    <label for="country" class="form-label fw-bold fst-italic" style="color:rgba(214, 79, 16, 0.527)">Country</label>
+</div>
+
+<!-- <div class="form-group"> -->
+    <!-- State Dropdown (select) -->
+    <!-- <select class="form-control bg-transparent border-top border-bottom fs-6 border-light" id="state" name="state" style="background-color:rgba(214, 79, 16, 0.527)"> -->
+        <!-- <option value="" selected>Select State</option> -->
+        <!-- {% if selected_country_id %} -->
+            <!-- {% for state in states %} -->
+                <!-- <option value="{{ state.id }}" {% if state.id == selected_state_id %}selected{% endif %}> -->
+                    <!-- {{ state.state_name }} -->
+                <!-- </option> -->
+            <!-- {% endfor %} -->
+        <!-- {% endif %} -->
+    <!-- </select> -->
+    <!-- <label for="state" class="form-label fw-bold fst-italic" style="color:rgba(214, 79, 16, 0.527)">State</label> -->
+<!-- </div> -->
+
+  <div class="form-group">
+      <input type="text" class="form-control bg-transparent border-top border-bottom border-light" id="address" name="address" placeholder="Address" style="background-color:rgba(214, 79, 16, 0.527)">
+      <label for="address" class="form-label fw-bold fst-italic" style="color:rgba(214, 79, 16, 0.527)">Address</label>
+  </div>
+
+  <div class="form-group">
+      <input type="password" class="form-control bg-transparent border-top border-bottom border-light" id="password" name="password" placeholder="Password" style="background-color:rgba(214, 79, 16, 0.527)">
+      <label for="password" class="form-label fw-bold fst-italic" style="color:rgba(214, 79, 16, 0.527)">Password</label>
+  </div>
+
+  <div class="row m-5 mb-3 mt-3">
+      <button type="submit" class="form-control btn btn-outline-light" style="background-color:rgba(214, 79, 16, 0.527)">Register</button>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  </div>
+  
+  <div class="d-flex justify-content-evenly">
+      <div class="col">
+          <a class="form-control btn btn-outline-primary fw-bolder" href="/scm/login/">Sign-In</a>
+      </div>
+      <div class="col">
+          <a class="form-control btn btn-outline-primary fw-bolder" href="#">Forgot Password</a>
+      </div>
+  </div>
+</form>
+
+          </div>
+      </main>
+      </div>
+  
+  <!-- Add Bootstrap JS and jQuery for any interactivity -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      
+  <!-- footer -->
+  <div>
+    <footer class="container d-block text-center border-top border-light mt-5 pt-5" style="height:100px; line-height:100px;">
+      <p>&copy; 2024 SongCoMark</p>
+    </footer>
+  </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="static/jquery.min.js"></script>   
+  </body>
+</html>

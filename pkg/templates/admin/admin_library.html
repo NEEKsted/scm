@@ -1,0 +1,55 @@
+{% extends "admin/home.html" %}
+
+{% block customcss %}
+style="background-color:#fff"
+{% endblock %}
+
+{% block content %}
+<div class="content">
+  <button class="btn btn-dark" disabled>Hi {{deets.user_fname|title}}!</button>
+  {% set l = get_flashed_messages(with_categories=True) %}
+  {% if l %}
+    {% for ct,mg in l %}
+      {% if ct == 'error' %}
+        <div class="alert alert-danger noround">{{mg}}</div>
+        {% else %}
+        <div class="alert alert-info noround">{{mg}}</div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  
+{% if session.get('useronline') != None %}
+<div class="container">
+  {% if deets %}
+  <div class="row g-2">
+  <div class="col-2">
+    
+      <div class="card h-80 shadow">
+        <img src="/static/album/{{deets.user_pix}}" class="card-img-top rounded" alt="{{deets.user_name}}">
+        <div class="card-body">
+          <h5 class="card-title">Genre || {{deets.user_genre}}</h5>
+          <p class="card-text">Lyricist || {{deets.user_name}}</p>
+          <div class="row">
+              <i class="fa-brands fa-gripfire"></i>
+              <span>Blaze</span>
+            
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-body-secondary">Art</small>
+        </div>
+      </div>
+      
+  </div>
+</div>
+{% endif %}
+</div>
+{% endif %}
+
+<!--end breakout session--> 
+
+
+ <!--- End of Extra independent sessions that home page may wish to populate-->
+ </div>
+ {% endblock %}

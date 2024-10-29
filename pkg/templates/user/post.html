@@ -1,0 +1,165 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='/static/images/download__1_-removebg-preview.png' rel='icon' type='image/x-icon'>
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='fontawesome/css/all.css')}}" rel='stylesheet'>
+    <title>SongCoMark</title>
+    <style>
+      .body{
+        background-color:   rgba(77, 180, 180, 0.322);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+    
+    
+    <link href="/static/main.css" rel="stylesheet">
+
+  </head>
+  <body class="body"> 
+
+    
+    <div class="row ms-0 justify-content-center">
+      <div class="col">
+        <h3 class="scm " style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: rgba(214, 79, 16, 0.527);"><a class="navbar-brand" href="/scm/user-home/">SONGCOMARK</a></h3>
+      </div>
+
+      <div class="col-4 shadow mt-3" style="margin-inline-end: 5%;">
+          <ul class="nav justify-content-center">
+            <div class="col-sm-1 justify-content-sm-center navheight">
+              <a href="#" class="d-flex link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">          
+              </a>
+              <img src="/static/user_pix/{{deets.user_pix}}" name="profilepix" id="profilepix" width="32" height="32" class="rounded-circle">
+              <ul class="dropdown-menu text-small">
+                <li><a href="/scm/library/" class="dropdown-item">MyLibary</a></li>
+                <li><a href="/scm/post/" class="dropdown-item">Post</a></li>
+                <li><a href="/scm/profile_picture/" class="dropdown-item">Account</a></li>          
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/scm/logout/">Sign out</a></li>
+              </ul>
+            </div>
+
+            <!-- about us -->
+            <li class="nav-item">
+              <a class="nav-link text-dark fw-bold" href="" title="About Us" alt="About Us">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <i class="fa-regular fa-address-card"></i>
+                </div>
+              </a>
+            </li>
+            <!-- end about us -->
+
+            <!-- contact us -->
+            <li class="nav-item">
+              <a class="nav-link text-dark fw-bold " href="#" title="Contact Us" alt="Contact Us"><i class="fa-solid fa-phone-volume"></i></a>
+            </li>
+            <!-- end contact us -->
+
+            <!-- Adverts -->
+            <li class="nav-item">
+              <a class="nav-link " href="#" title="Adverts" alt="ADs"><i class="fa-solid fa-rectangle-ad"></i></a>
+            </li>
+            <!-- end Adverts -->
+
+          </ul>
+
+        </div>
+      
+    </div>
+<main>
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: rgba(214, 79, 16, 0.527); font-size: 3rem;">Audio Upload</h3>
+    </div>
+  </div>
+  <div class="container d-flex">
+      <div class="col-sm-6">
+
+        <form enctype="multipart/form-data" method="post">
+          <div class="row form-group mb-3 border-bottom justify-content-center">
+            <input type="text" class="form-control bg-transparent border-top border-bottom border-light fst-italic" value="{{deets.user_name}}" id="user" name="user" style="background-color:rgba(214, 79, 16, 0.527); width:fit-content;" disabled>
+          </div>
+          <div class="form-group mb-3 border-bottom">
+            <input type="file" class="form-control bg-transparent border-top border-bottom border-light fst-italic" id="musicfile" name="musicfile" style="background-color:rgba(214, 79, 16, 0.527)">
+            <label for="musicfile" class="form-label fw-bold" style="color:rgba(214, 79, 16, 0.527); font-size: smaller;">Upload Your Audio (.mp3, .wav) </label>
+          </div>
+          <div class="form-group mb-3 border-bottom">
+            <input type="file" class="form-control bg-transparent border-top border-bottom border-light fst-italic" id="audioalbum" name="audioalbum" style="background-color:rgba(214, 79, 16, 0.527)">
+            <label for="audioalbum" class="form-label fw-bold" style="color:rgba(214, 79, 16, 0.527); font-size: smaller;">Upload a Cover Image (.jpg, .png, .jpeg) </label>
+          </div>
+          <div class="form-group mb-3 border-bottom">
+            <input type="text" class="form-control bg-transparent border-top border-bottom border-light fst-italic" id="title" name="title" placeholder="Enter the title of this Audio..." style="background-color:rgba(214, 79, 16, 0.527)">
+            <label for="title" class="form-label fw-bold" style="color:rgba(214, 79, 16, 0.527); font-size: smaller;">Title</label>
+          </div>
+          <div class="form-group mb-3 border-bottom">
+            <input type="text" class="form-control bg-transparent border-top border-bottom border-light fst-italic" id="lyricist" name="lyricist" placeholder="Credit a Songwriter..." style="background-color:rgba(214, 79, 16, 0.527)">
+            <label for="lyricist" class="form-label fw-bold" style="color:rgba(214, 79, 16, 0.527); font-size: smaller;">lyricist</label>
+          </div>
+          <div class="form-group mb-3 border-bottom">
+            <input type="text" class="form-control bg-transparent border-top border-bottom border-light fst-italic" id="quotes" name="quotes" placeholder="Make a nice quote on this work..." style="background-color:rgba(214, 79, 16, 0.527)">
+            <label for="quotes" class="form-label fw-bold" style="color:rgba(214, 79, 16, 0.527); font-size: smaller;">Quote</label>
+          </div>
+          <div class="form-group mb-3 border-bottom">
+            <input type="text" class="form-control bg-transparent border-top border-bottom border-light fst-italic" id="producer" name="producer" placeholder="Credit a producer..." style="background-color:rgba(214, 79, 16, 0.527)">
+            <label for="producer" class="form-label fw-bold" style="color:rgba(214, 79, 16, 0.527); font-size: smaller;">Producer</label>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="form-control btn btn-outline-primary fst-italic" id="update" name="update" >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          </div>
+         
+      </form>
+
+      </div>
+      
+      <div class="col-4" style="margin:auto; margin-inline-start: 25%; height:35cap;">
+        <div class="col">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div class="alert alert-info">
+                <ul>
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          {% endwith %}
+
+        </div> 
+        <img src="/static/images/download__1_-removebg-preview.png" alt="" class="img-fluid">        
+        <div class="col">
+          <h3 class="scmadd" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: rgba(214, 79, 16, 0.527);"><a class="navbar-brand" href="/">SONGCOMARK</a></h3>
+        </div>
+      </div>
+</div>
+
+</main>
+<footer class="container text-center border-top" style="height:100px; line-height:100px;">
+  <p class="float-end">
+    <a href="#" style="color:#0e0d0c"><i class="fa-solid fa-angle-up"></i>
+    </a>
+  </p>
+  <p>&copy; 2024 SongCoMark</p>
+</footer>
+
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="static/jquery.min.js"></script>   
+
+<script>
+var likenum= 1
+  function like() {
+    alert(likenum)
+    likenum = likenum + 1
+
+  }
+</script>
+
+  </body>
+</html>

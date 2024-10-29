@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='/static/images/favicon (1).png' rel='icon' type='image/x-icon'>
+    <link href="{{url_for('static',filename='fontawesome/css/all.css')}}" rel='stylesheet'>
+    <link href="{{url_for('static',filename='bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href='/static/bootstrap/fontawesome/css/all.css' rel='stylesheet'>
+    <link href='/static/images/favicon (1).png' rel='icon' type='image/x-icon'>
+    <link href="{{url_for('static',filename='bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href='/static/bootstrap/fontawesome/css/all.css' rel='stylesheet'>
+    <title>SongCoMark</title>
+    
+    
+    <link href="/static/main.css" rel="stylesheet">
+
+  </head>
+  <body> 
+
+    <div class="row m-4 justify-content-center">
+      <div class="col">
+        <a class="navbar-brand " href="/">
+          <h3 class="scm">SongCoMark</h3>
+          </a>
+          {% if session.get('useronline') == None %}
+          <a href="/scm/admin/login/" class="navbar-brand position-fixed bottom-0" target="_blank"><i class="fa-solid fa-user-tie"></i></a>
+          {% endif %}
+      </div>
+      
+      <div class="col-sm-1 justify-content-sm-center shadow navheight">
+        {% if session.get('useronline') != None %}
+        <a href="#" class="d-flex link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
+          {% if deets and deets.user_pix %}
+        
+          <img src="/static/user_pix/{{deets.user_pix}}" alt="profile picture" width="32" height="32" class="rounded-circle">
+          
+          {% else %}
+          <img src="/static/images/scm.png" name="profilepix" id="profilepix" width="32" height="32" class="rounded-circle">
+          {% endif %}
+      </a>
+        
+        <ul class="dropdown-menu text-small">
+          
+          <li><a href="/scm/library/" class="dropdown-item">MyLibary</a></li>
+          <li><a href="/scm/post/" class="dropdown-item">Post</a></li>
+          <li><a href="#" class="dropdown-item">Transaction</a></li>
+          <li><a href="/scm/update/" class="dropdown-item">Account</a></li>          
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="/scm/admin/login/">Sign out</a></li>
+        </ul>
+      {% endif %}
+    </div>
+      
+      <div class="col-sm-4 shadow navheight">
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" aria-current="page" href="/" title="SPACE" alt="SPACE"><i class="fa-solid fa-house-user"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-bold" href="" title="About Us" alt="About Us">
+              <div class="modal-dialog modal-dialog-scrollable">
+                <i class="fa-regular fa-address-card"></i>
+              </div>
+            </a>
+        
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark fw-bold" href="#" title="Contact Us" alt="Contact Us"><i class="fa-solid fa-phone-volume"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true" title="Direct Message" alt="DM"><i class="fa-brands fa-rocketchat"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#" title="Adverts" alt="ADs"><i class="fa-solid fa-rectangle-ad"></i></a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+<main>
+ 
+
+
+<div class="container col-md-10 py-5"{%block customcss%}{%endblock%}>
+  
+ 
+ {% block content %}
+    <div class="row align-items-center justify-content-around shadow rounded image" >
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <h1 class="fs-1 fw-bolder text-light m-5">SONGCOMARK</h1>
+          </div>
+        </div>
+        
+        <div class="row">
+          {% if session.get('useronline') == None %}
+          <div class="col-3">
+        <button type="button" class="btn btn-dark box-shadow text-light px-4 me-md-2 rounded">
+          <a href="/scm/register/" class="btn btn-light box-shadow rounded px-4">Sign-Up</a>
+        </button>
+      </div>
+
+      <div class="col-3 g-0 m-0">
+        <button type="button" class="btn btn-dark box-shadow text-light px-4 me-md-2 rounded">
+          <a href="/scm/login/" class="btn btn-light box-shadow rounded px-4">Sign-In</a>
+        </button>
+      </div>
+        </div>
+        
+        <div class="col-sm-3">
+          {% else %}
+        </div>
+       <div class="col-sm-3">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="/static/images/write.jpeg" class="d-block w-100 rounded" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="/static/images/network.png" class="d-block w-100 rounded" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="/static/images/songmaking.jpeg" class="d-block w-100 rounded" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        {% endif %}
+       </div>
+        
+      </div>
+    </div>
+    {% endblock content %}
+
+</div>
+
+<div class="row justify-content-around">
+  <div class="col-3">
+    <p class="fw-bolder text-center border-bottom border-top shadow text-warning" style="max-width: 500px;">Audio Space</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row g-2">
+  {% if audio %}
+    {% for audio in audio %}
+    <div class="col-3">
+    
+      <div class="card h-80 shadow">
+        <img src="/static/album/{{audio.album}}" height="40" style="width:50px" class="card-img-top rounded-circle" alt="{{deets.user_name}}">{{deets.uploader}}
+        <div class="card-body">
+          <h5 class="card-title">Title || {{audio.lyric_title}}</h5>
+          <p class="card-text">Lyricist || {{audio.lyricist}}</p>
+          <div class="row">
+            <div class="col">
+              <label for="Blaze"></label>
+              <button onclick="like()"><i class="fa-brands fa-gripfire"></i></button>
+              <span id="likeCount">{{ like_count }}Blaze</span>
+              <div class="row">
+                    <audio src="/static/audio/{{audio.audio}}" id="musicPlayer" class="form-control" onclick="playMusic()" style="height: 23px;" controls="">{{audio.audio}}</audio>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-body-secondary">Posted || {{audio.date_uploaded}}</small>
+        </div>
+      </div>
+      
+      
+  </div>
+  {% endfor %}
+      {% endif %}
+</div>
+</div>
+
+
+<!-- OPTIMZATION -->
+        <div class="row m-4 p-4 pt-5 shadow justify-content-sm-around">
+            <!-- OUR MISSION -->
+            <div class="col-sm-4 shadow bg-light text-center rounded fw-light p-3">
+                <h3 class="fw-bold">Our Mission</h3>
+                <p class="row text fs-5 fst-italic p-2 lh-base">
+                    A long term objective, that is to build the industries 
+                    best of talents into lime-light. <br>
+                    Bringing a the art work into a viable web interaction space
+                    for its users. The SPACE is meant to have a well-focused orientation
+                    on the needs of its users.
+                    As the SPACE holds your hand through the musical path of lyrics
+                    More fetaures are under construction to make the SPACE more efficient
+                    for its USERS
+                </p>
+            </div>
+            <!-- OUR VISION -->
+            <div class="col-sm-4 shadow bg-light text-center rounded fw-light p-3">
+                <h3 class="fw-bold">OUR VISION</h3>
+                <p class="row text fs-5 fst-italic p-2 lh-base">
+                    The SPACE is focused on letting songwriters see 
+                    the brighter sides of the industry, even with less sponsorship
+                    capabilities inspiring artistes and even non artiste
+                    find the joy of musical artistry within the SPACE <br>
+                    In a pace where anybody could really get a musical work
+                    with a SPACE of time what would you think the world would be of ?
+                </p>
+            </div>
+        </div>
+
+<!-- FOOTER -->
+<footer class="container text-center" style="height:100px; line-height:100px;">
+  <p class="float-end">
+    <a href="#" style="color:#0e0d0c"><i class="fa-solid fa-angle-up"></i>
+    </a>
+  </p>
+  <p>&copy; 2024 SongCoMark</p>
+</footer>
+
+</main>
+
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="static/jquery.min.js"></script>   
+
+<script>
+var likenum= 1
+  function like() {
+    alert(likenum)
+    likenum = likenum + 1
+
+  }
+</script>
+
+  </body>
+</html>

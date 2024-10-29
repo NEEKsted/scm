@@ -1,0 +1,51 @@
+{% extends "user/home_layout.html" %}
+
+{% block content %}
+
+<h1>Search Results for "{{ query }}"</h1>
+
+{% if results %}
+
+<div class="container">
+    <div class="row g-2">
+    {% if audio %}
+      {% for audio in audio %}
+      <div class="col-3">
+      
+        <div class="card h-80 shadow">
+          <img src="/static/album/{{audio.album}}" height="40" style="width:50px" class="card-img-top rounded-circle" alt="{{deets.user_name}}">
+          <span>{{audio.uploader}}</span>
+          <div class="card-body">
+            <h5 class="card-title">Title || {{audio.lyric_title}}</h5>
+            <p class="card-text">Lyricist || {{audio.lyricist}}</p>
+            <div class="row">
+              <div class="col">
+                <label for="Blaze"></label>
+                <button onclick="like()"><i class="fa-brands fa-gripfire"></i></button>
+                <span id="likeCount">Blaze</span>
+                <div class="row">
+                      <audio src="/static/audio/{{audio.audio}}" id="musicPlayer" class="form-control" onclick="playMusic()" style="height: 23px;" controls="">{{audio.audio}}</audio>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-body-secondary">Posted || {{audio.date_uploaded}}</small>
+          </div>
+        </div>
+        
+        
+    </div>
+    {% endfor %}
+        {% endif %}
+  </div>
+  </div>
+  
+
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+</body>
+
+{% endblock %}
+

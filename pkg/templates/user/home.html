@@ -1,0 +1,192 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href='/static/images/download__1_-removebg-preview.png' rel='icon' type='image/x-icon'>
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='fontawesome/css/all.css')}}" rel='stylesheet'>
+    <title>SongCoMark</title>
+    <style>
+      .body{
+        background-color:  rgba(214, 79, 16, 0.904);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+    
+    
+    <link href="/static/main.css" rel="stylesheet">
+
+  </head>
+  <body class="body">
+    <!-- SCM homepage first div -->
+    <div class="row ms-0 justify-content-center">
+      <!-- SCM home overall navigation -->
+      <div class="col">
+        <h3 class="scm " style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: rgba(214, 79, 16, 0.527);"><a class="navbar-brand" href="/">SONGCOMARK</a></h3>
+      </div>
+      <!-- end SCM home overall navigation -->
+
+      <!-- navigation -->
+      <div class="col-4 shadow mt-3" style="margin-inline-end: 5%;">
+          <ul class="nav justify-content-center">
+            <!-- home -->
+            <div class="col-sm-1 justify-content-sm-center navheight">
+              <a href="#" class="d-flex link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">          
+              </a>
+              <img src="/static/user_pix/{{deet.user_pix}}" name="profilepix" id="profilepix" width="32" height="32" class="rounded-circle">
+              <ul class="dropdown-menu text-small">
+                <li><a href="/scm/library/" class="dropdown-item">MyLibary</a></li>
+                <li><a href="/scm/post/" class="dropdown-item">Post</a></li>
+                <li><a href="/scm/profile_picture/" class="dropdown-item">Account</a></li>          
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/scm/logout/">Sign out</a></li>
+              </ul>
+            </div>
+
+            <!-- about us -->
+            <li class="nav-item">
+              <a class="nav-link text-dark fw-bold" href="" title="About Us" alt="About Us">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <i class="fa-regular fa-address-card"></i>
+                </div>
+              </a>
+            </li>
+
+            <!-- contact us -->
+            <li class="nav-item">
+              <a class="nav-link text-dark fw-bold " href="#" title="Contact Us" alt="Contact Us"><i class="fa-solid fa-phone-volume"></i></a>
+            </li>
+
+            <!-- Adverts -->
+            <li class="nav-item">
+              <a class="nav-link " href="#" title="Adverts" alt="ADs"><i class="fa-solid fa-rectangle-ad"></i></a>
+            </li>
+          </ul>
+        </div>
+      <!-- end SCM navigation -->
+      
+    </div>
+    <!-- end SCM homepage first div -->
+
+    <!-- SCM hero -->
+      <main class="container" style="background-color: rgba(214, 79, 16, 0.527);">
+        
+        <!-- SCM search input -->
+        <div class="row justify-content-center mt-3" style="max-height: 5px;">          
+          <div class="col-5">
+            <div class="form-floating shadow" >
+              {{ form.searching(class="form-control text-center fs-smaller fw-bold fst-italic text-dark", style="max-height:5px") }}
+              {{ form.searching.label(class="form-control-label") }}
+              
+            </div>
+          </div>
+        </div>
+        <!-- end SCM search input -->
+      <div class="container mt-3" style="background-image: url(static/images/download__1_-removebg-preview.png); background-repeat:no-repeat; background-position: center;">
+        <div class="container col-md-10 py-5"{%block customcss%}{%endblock%}>
+          
+          <!-- SCM flash messages handling -->
+          <div class="col">
+            {% set l = get_flashed_messages(with_categories=True) %}
+            {% if l %}
+              {% for ct,mg in l %}
+                {% if ct == 'error' %}
+                  <div class="alert alert-danger noround">{{mg}}</div>
+                  {% else %}
+                  <div class="alert alert-info noround">{{mg}}</div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+          <!-- end SCM flash messages handling -->
+        
+        {% block content %}
+        <!-- SCM flash messages handling -->
+
+            <!-- end SCM flash messages handling -->
+            {% endblock content %}
+        
+        </div>
+        
+        <!-- SCM Audio Space -->
+        <div style="background-image:url(static/images/bg-removebg-preview.png); background-size: contain; background-repeat: no-repeat; background-position: center;">
+          <div class="container mb-3" style="min-height:20rem;">
+            <div class="row justify-content-around">
+            <div class="col-3 pt-3 border-bottom border-top">
+              <p class=" text-center fw-bolder scmadd" style="max-width: 500px; font-size: 3rem; color: #d64f1086;">Audio Space</p>
+            </div>
+          </div>
+          
+          <div class="row " >
+            {% if audio %}
+            {% for audio in audio %}
+            <div class="col-sm-4 mt-2">
+              <div class="card bg-transparent ">
+                <img src="/static/album/{{audio.album}}" style="width:30%; height:100px" class=" rounded-circle img-fluid" alt="{{deets.user_name}}">
+                <div class="card-body">
+                  <h5 class="card-title">Title ||</h5><p>{{audio.lyric_title}}</p>
+                  <p class="card-text fw-bold">Lyricist || </p><p>{{audio.lyricist}}</p>
+                  <div class="row">
+                    <div class="col">
+                      <label for="Blaze"></label>
+                      <button onclick="like()"><i class="fa-brands fa-gripfire"></i></button>
+                      <span id="likeCount">Blaze</span>
+                      <div class="row">
+                            <audio src="/static/audio/{{audio.audio}}" id="musicPlayer" class="form-control" onclick="playMusic()" style="height: 23px;" controls="">{{audio.audio}}</audio>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <small class="text-body-secondary">Posted || {{audio.date_uploaded}}</small>
+                </div>
+              </div> 
+            </div>
+              {% endfor %}
+              {% endif %}
+          </div>
+          </div>
+
+          <!-- SCM Mission and Vision -->
+          
+          <!--  end SCM Mission and Vision -->
+        </div>
+        <!-- end SCM Audio Space -->
+
+        <!-- SCM FAQa -->
+
+          <!-- end SCM testimonials -->
+        
+      </div>
+
+      </main>
+      <!-- end hero -->
+
+      <!-- footer -->
+<footer class="container text-center border-top" style="height:100px; line-height:100px;">
+    <p class="float-end">
+      <a href="#" style="color:#0e0d0c"><i class="fa-solid fa-angle-up"></i>
+      </a>
+    </p>
+    <p>&copy; 2024 SongCoMark</p>
+  </footer>
+  <!-- end footer -->
+<script src="/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="/static/jquery.min.js"></script>   
+
+<script>
+var likenum= 1
+  function like() {
+    alert(likenum)
+    likenum = likenum + 1
+
+  }
+</script>
+
+  </body>
+</html>

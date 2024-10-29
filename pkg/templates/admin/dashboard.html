@@ -1,0 +1,288 @@
+{% extends "admin/base.html" %}
+
+{% block hero %}
+
+<div class="container">
+  <!-- Flash messages -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <div class="alert-container text-center">
+          {% for message in messages %}
+              <div class="alert alert-{{ 'success' if 'success' in message else 'info' }}" role="alert">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+{% endwith %}
+
+    <div class="row">
+        <div class="col-sm-4">
+
+                    <a href="#" class="card" >
+                      <button class="btn btn-warning" style="min-height: 70px;">
+                        <h6>Active Users</h6>
+                        <p>{{deet}}</p>
+                      </button>
+                    </a>
+
+                    <a href="#" class="card">
+                      <button class="btn btn-dark" style="min-height: 70px;">
+                        <h6>Disabled Users</h6>
+                        <p>{{deet}}</p>
+                      </button>
+                    </a>
+
+                    <a href="" class="card">
+                      <button class="btn btn-primary" style="min-height: 70px;">
+                        <h6>Approved Audios</h6>
+                        <p>{{deet}}</p>
+                      </button>
+                    </a>
+
+                    <a href="#" class="card">
+                      <button class="btn btn-danger" style="min-height: 70px;">
+                        <h6>Disapproved Audios</h6>
+                        <p>{{deet}}</p>
+                      </button>
+                    </a>
+        </div>
+
+
+        <div class="col-8">
+            <div class="row justify-content-center ">
+                <div class="col-2 mt-5">
+                    <p class="text text-info fs-4 fw-bold text-center fst-italic" style="text-shadow: 2px 2px rgb(233, 227, 227);">Display</p>
+                </div>
+            </div>
+
+            <div class="row border-top shadow ">
+                <div class="col">
+                  <div class="row">
+                  <div class="col">
+                    <button class="btn">
+                      Disabled Any User and view all Active Users here...
+                    </button>
+                  </div>
+                </div>
+                <pre>
+                      <table class="table table-danger table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">S/N</th>
+                            <th scope="col">User Profile Picture</th>
+                            <th scope="col">User Fullname</th>
+                            <th scope="col">User Genre</th>
+                            <th scope="col">User Email</th>
+                            <th scope="col">User Phone</th>
+                            <th scope="col">Disable Button</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                          
+                           {% for deets in deets %}
+                            {% if deets.user_status == 'enable'  or deets.user_status == "pending"%}
+                          <tr>
+                            <td scope="row">{{deets.user_id}}</td>
+                            <td><img src="/static/user_pix/{{deets.user_pix}}" width="30" height="30" class="rounded-circle" alt="{{deets.user_fname}}"></td>
+                            <td>{{deets.user_fname}} {{deets.user_lname}}</td>
+                            <td>{{deets.user_genre}}</td>
+                            <td>{{deets.user_email}}</td>
+                            <td>{{deets.user_phone}}</td>
+                            <form action="{{ url_for('disable', user_id=deets.user_id) }}" method="get">
+                            <td><button type="submit" id="disable" name="disable" class="form-control btn-success"><i class="fa-regular fa-eye-slash"></i></button></td>
+                           </form>
+                          </tr>
+                          {% endif %}
+                           {% endfor %}
+                          
+                          
+                            
+                        </tbody>
+                      </table>
+                       
+                    
+                    
+                    
+                  </pre>
+                </div>
+            </div>
+
+            
+            <div class="row border-top shadow">
+              <div class="col">
+                <div class="row">
+                <div class="col">
+                  <button class="btn">
+                    Enable Any User and view all Disabled Users here...
+                  </button>
+                </div>
+              </div>
+              <pre>
+               
+              
+                
+                <table class="table table-success table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">S/N</th>
+                      <th scope="col">User Profile Picture</th>
+                      <th scope="col">User Fullname</th>
+                      <th scope="col">User Genre</th>
+                      <th scope="col">User Email</th>
+                      <th scope="col">User Phone</th>
+                      <th scope="col">Enable Button</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for deets in deets %}
+                    {% if deets.user_status == 'disable' %}
+                    <tr>
+                      <td scope="row">{{deets.user_status}}</td>
+                      <td><img src="/static/user_pix/{{deets.user_pix}}" width="30" height="30" class="rounded-circle" alt="{{deets.user_fname}}"></td>
+                      <td>{{deets.user_fname}} {{deets.user_lname}}</td>
+                      <td>{{deets.user_genre}}</td>
+                      <td>{{deets.user_email}}</td>
+                      <td>{{deets.user_phone}}</td>
+                      <form action="{{ url_for('enable',user_id=deets.user_id) }}" method="get">
+                      <td><button type="submit" id="enable" name="enable" value="enable" class="form-control btn-danger"><i class="fa-sharp fa-regular fa-eye"></i></button></td>
+                    </form>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    
+                  </tbody>
+                </table>
+                
+              
+              
+              
+            
+              </pre>
+            </div>
+            </div>
+
+
+            <div class="row border-top shadow">
+              <div class="col">
+                <div class="row">
+                <div class="col">
+                  <button class="btn">
+                    Active Audios
+                  </button>
+                </div>
+              </div>
+              <pre>
+                <table class="table table-warning table-striped mt-5">
+                    <thead>
+                      <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col fw-lighter">Lyricist</th>
+                        <th scope="col">Lyric Title</th>
+                        <th scope="col">Audio File</th>
+                        <th scope="col">Audio Album</th>
+                        <th scope="col">Audio Producer</th>
+                        <th scope="col">Ban Button</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for audios in audios %}
+                        {% if audios.audio_status == 'active' or audios.audio_status == 'pending' or audios.audio_status == 'Null' %}
+                      <tr>
+    
+                        <th scope="row">{{audios.audio_id}}</th>
+                        <td>{{audios.lyricist}}</td>
+                        <td>{{audios.lyric_title}}</td>
+                        <td>{{audios.audio}}</td>
+                        <td>{{audios.album}}</td>
+                        <td>{{audios.producer}}</td>
+                        <td>{{audios.date_uploaded}}</td>
+                        <form action="{{ url_for('ban',audio_id=audios.audio_id) }}" method="get">
+                        <td><button type="submit" id="disaprovebtn" class="form-control btn-danger"><i class="fa-solid fa-ban"></i></button></td>
+                        </form>
+                      </tr>
+                      {% endif %}
+                        {% endfor %}
+                    </tbody>
+                  </table>
+              
+            </pre>
+            </div>
+            </div>
+
+            <div class="row border-top shadow">
+              <div class="col">
+                <div class="row">
+                <div class="col">
+                  <button class="btn">
+                    Banned Audios
+                  </button>
+                </div>
+              </div>
+              <pre>
+                <table class="table table-warning table-striped mt-5">
+                    <thead>
+                      <tr>
+                        <th scope="col">S/N</th>
+                        <th scope="col fw-lighter">Lyricist</th>
+                        <th scope="col">Lyric Title</th>
+                        <th scope="col">Audio File</th>
+                        <th scope="col">Audio Album</th>
+                        <th scope="col">Audio Producer</th>
+                        <th>Date Uploaded</th>
+                        <th scope="col">Unban Button</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for audios in audios %}
+                      {% if audios.audio_status == 'bann' or audios.audio_status == '' %}
+                      <tr>
+    
+                        <th scope="row">{{audios.audio_id}}</th>
+                        <td>{{audios.lyricist}}</td>
+                        <td>{{audios.lyric_title}}</td>
+                        <td>{{audios.audio}}</td>
+                        <td>{{audios.album}}</td>
+                        <td>{{audios.producer}}</td>
+                        <td>{{audios.date_uploaded}}</td>
+                        <form action="{{ url_for('unban',audio_id=audios.audio_id) }}" method="get">
+                        <td><button type="submit" id="disaprovebtn" class="form-control btn-danger"><i class="fa-solid fa-recycle"></i></button></td>
+                        </form>
+                      </tr>
+                      {% endif %}
+                        {% endfor %}
+                    </tbody>
+                  </table>
+              
+            </pre>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+  $("#approved").click(function(e) {
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "/scm/admin/<audio.lyric_title>/approved/",
+      data: {
+        id: $("#approvebtn").val(),
+      },
+      success: function(result) {
+        ;
+      },
+      error: function(result) {
+        alert('error');
+      }
+    });
+  });
+});
+</script>
